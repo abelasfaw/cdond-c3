@@ -269,8 +269,7 @@ jobs:
           at: ~/
       - run:
           name: Install dependencies
-          command: |
-            command: apk add --upgrade ansible bash openssh-client nodejs npm curl
+          command: apk add --upgrade ansible bash openssh-client nodejs npm curl
       - run:
           name: install aws-cli
           command: pip3 install awscli
