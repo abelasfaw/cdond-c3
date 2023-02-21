@@ -1,1 +1,2 @@
-Public Url to GitHub repository: https://github.com/abelasfaw/cdond-c3
+[URL01]: https://github.com/abelasfaw/cdond-c3 (Public Url to GitHub repository)
+[URL02]: http://udapeople-525af68.s3-website-us-east-1.amazonaws.com
