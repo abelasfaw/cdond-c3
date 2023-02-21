@@ -301,11 +301,7 @@ jobs:
       - run:
           name: Install AWS-CLI
           command: pip3 install awscli
-      - run: sleep 60 # instance wait time       
-      # - run:
-      #     name: Get backend url
-      #     command: |
-      #       # your code here
+      - run: sleep 120 # instance wait time       
       - run:
           name: Backend smoke test.
           command: |
@@ -313,9 +309,10 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --output text)
-            export BACKEND_URL="http://${BACKEND_IP}:3030"
+            export BACKEND_URL=http://${BACKEND_IP}:3030
             echo ${BACKEND_URL}
-            if curl "${BACKEND_URL}/api/status" | grep "ok"
+            echo "${BACKEND_URL}/api/status"
+            if curl -s ${BACKEND_URL}/api/status | grep "ok"
             then
               return 0
             else 
