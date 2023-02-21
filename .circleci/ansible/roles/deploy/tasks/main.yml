@@ -1,0 +1,19 @@
+- name: create backend directory
+  file:
+    path: ~/code
+    state: directory
+
+- name: extract artifact
+  unarchive:
+    src: artifact.tar.gz
+    dest: ~/code
+
+- name: install dependencies
+  command: npm install
+  args:
+    chdir: ~/code
+
+- name: start server
+  command: pm2 start npm -- start
+  args:
+    chdir: ~/code/dist
