@@ -17,3 +17,7 @@
   command: pm2 start npm -- start
   args:
     chdir: ~/code/dist
+
+- name: print message
+  debug:
+    msg: "{{ execute_node.stdout_lines }}"
