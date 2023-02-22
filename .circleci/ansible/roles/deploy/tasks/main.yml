@@ -14,8 +14,8 @@
     chdir: ~/code
 
 - name: start server
-  #command: pm2 start npm -- start
-  command: node main.js
+  command: pm2 start npm -- start
+  #command: node main.js
   args:
     chdir: ~/code/dist
   register: execute_node
