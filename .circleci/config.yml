@@ -47,12 +47,11 @@ commands:
           when: on_fail
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
-            # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable
-            if(( $SUCCESS==1 )); 
-            then
-              cd ~/project/backend
-              npm install
-              npm run migration:revert
+            if [[ $SUCCESS -eq 1 ]] 
+              then
+                cd ~/project/backend
+                npm install
+                npm run migration:revert
             fi
             
 jobs:
@@ -328,7 +327,6 @@ jobs:
           name: Install dependencies
           command: |
             apk add --upgrade bash nodejs npm curl
-            bash
       - run:
           name: Install AWS-CLI
           command: pip3 install awscli
@@ -349,6 +347,7 @@ jobs:
             else 
               return 1
             fi
+            
       - run:
           name: Frontend smoke test.
           command: |
