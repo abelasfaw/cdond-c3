@@ -76,12 +76,12 @@ jobs:
           name: Revert migrations
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
-            if [[ $SUCCESS -eq 1 ]] 
-              then
-                cd ~/project/backend
-                npm install
-                npm run migration:revert
-            fi 
+            if (( $SUCCESS == 1 ));
+            then
+              cd ~/project/backend
+              npm install
+              npm run migration:revert
+            fi
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
