@@ -326,7 +326,9 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: apk add --upgrade bash nodejs npm curl
+          command: |
+            apk add --upgrade bash nodejs npm curl
+            bash
       - run:
           name: Install AWS-CLI
           command: pip3 install awscli
@@ -354,7 +356,7 @@ jobs:
             echo ${FRONTEND_URL}
             if curl -s ${FRONTEND_URL} | grep "Welcome"
             then
-              return 0
+              return 1
             else
               return 1
             fi
