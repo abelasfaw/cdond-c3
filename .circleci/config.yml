@@ -53,7 +53,31 @@ commands:
               npm run migration:revert
             fi
             
+
 jobs:
+  test-revert:
+    docker:
+      - image: python:3.7-alpine3.11 
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --upgrade bash nodejs npm curl
+      - run:
+          name: Install AWS-CLI
+          command: pip3 install awscli
+      - run: sleep 50 # instance wait time
+      - run:
+          name: Revert migrations
+          command: |
+            SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
+            if [ $SUCCESS == 1 ] 
+              then
+                cd ~/project/backend
+                npm install
+                npm run migration:revert
+            fi 
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -414,6 +438,7 @@ jobs:
 workflows:
   default:
     jobs:
+      - test-revert
       - build-frontend
       - build-backend
       - test-frontend:
