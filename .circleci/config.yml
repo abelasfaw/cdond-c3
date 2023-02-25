@@ -63,12 +63,14 @@ jobs:
     docker:
       - image: python:3.7-alpine3.11  
     steps:
-      - checkout 
-      - install_awscli
+      - checkout
       - run:
           name: Install dependencies
           command: |
             apk add --upgrade bash nodejs npm curl
+      - run:
+          name: Install AWS-CLI
+          command: pip3 install awscli
       # - install_nodejs
       # - run: sleep 50 # instance wait time
       - run:
