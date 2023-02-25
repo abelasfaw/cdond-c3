@@ -47,42 +47,15 @@ commands:
           when: on_fail
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
-            if [ $SUCCESS == 1 ]; then
+            if [ "$SUCCESS" == 1 ]; 
+            then
               cd ~/project/backend
-              npm install
+              npm install --no-audit --no-fund
               npm run migration:revert
             fi
             
 
 jobs:
-  test-revert:
-    parameters:
-      Workflow_ID:
-        type: string
-        default: ${CIRCLE_WORKFLOW_ID:0:7}
-    docker:
-      - image: python:3.7-alpine3.11  
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --upgrade bash nodejs npm curl
-      - run:
-          name: Install AWS-CLI
-          command: pip3 install awscli
-      # - install_nodejs
-      # - run: sleep 50 # instance wait time
-      - run:
-          name: Revert migrations
-          command: |
-            SUCCESS=1
-            if [ "$SUCCESS" == 1 ]
-            then
-              cd ~/project/backend
-              npm install
-              npm run migration:revert
-            fi
   build-frontend:
     docker:
       - image: circleci/node:13.8.0
@@ -443,11 +416,8 @@ jobs:
 workflows:
   default:
     jobs:
-      - test-revert
-      - build-frontend:
-          requires: [test-revert]
-      - build-backend:
-          requires: [test-revert]
+      - build-frontend
+      - build-backend
       - test-frontend:
           requires: [build-frontend]
       - test-backend:
