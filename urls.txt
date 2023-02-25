@@ -1,5 +1,5 @@
 [URL01]: https://github.com/abelasfaw/cdond-c3 
-[URL02]: http://udapeople-26796de.s3-website-us-east-1.amazonaws.com
+[URL02]: http://udapeople-307313c.s3-website-us-east-1.amazonaws.com
 [URL03]: https://dy8fib5e8852.cloudfront.net
-[URL04]: ec2-34-224-3-89.compute-1.amazonaws.com
-[URL05]: ec2-54-237-52-235.compute-1.amazonaws.com
+[URL04]: ec2-100-26-209-151.compute-1.amazonaws.com
+[URL05]: ec2-52-91-149-118.compute-1.amazonaws.com
