@@ -76,7 +76,8 @@ jobs:
           name: Revert migrations
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
-            if (( $SUCCESS == 1 ));
+            x=1
+            if (( $SUCCESS == $x ));
             then
               cd ~/project/backend
               npm install
