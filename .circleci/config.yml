@@ -77,7 +77,7 @@ jobs:
           command: |
             SUCCESS=$(curl --insecure https://kvdb.io/C2ceCTUfyHwFbqbVHJNGXf/migration-<< parameters.Workflow_ID >>)
             x=1
-            if (( $SUCCESS -eq $x ));
+            if [ "$SUCCESS" == $x ]
             then
               cd ~/project/backend
               npm install
