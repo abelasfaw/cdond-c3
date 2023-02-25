@@ -61,16 +61,15 @@ jobs:
         type: string
         default: ${CIRCLE_WORKFLOW_ID:0:7}
     docker:
-      - image: cimg/base:stable 
+      - image: python:3.7-alpine3.11  
     steps:
       - checkout
-      # - run:
-      #     name: Install dependencies
-      #     command: |
-      #       apk add --upgrade bash nodejs npm curl
-      # 
+      - run:
+          name: Install dependencies
+          command: |
+            apk add --upgrade bash nodejs npm curl 
       - install_awscli
-      - install_nodejs
+      # - install_nodejs
       # - run: sleep 50 # instance wait time
       - run:
           name: Revert migrations
